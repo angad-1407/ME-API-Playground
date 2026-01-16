@@ -1,0 +1,75 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = "file:./dev.db"
+}
+
+model Profile {
+  id          Int       @id @default(autoincrement())
+  fullName    String
+  title       String
+  bio         String
+  email       String
+  location    String?
+  avatarUrl   String?
+  
+  skills      Skill[]
+  projects    Project[]
+  experience  WorkExperience[]
+  education   Education[]
+  links       Link[]
+}
+
+model Skill {
+  id        Int     @id @default(autoincrement())
+  name      String
+  category  String? // e.g., "Frontend", "Backend", "Tools"
+  profileId Int
+  profile   Profile @relation(fields: [profileId], references: [id])
+}
+
+model Project {
+  id          Int      @id @default(autoincrement())
+  title       String
+  description String
+  techStack   String   // Comma separated or JSON string, keeping it simple
+  repoUrl     String?
+  demoUrl     String?
+  imageUrl    String?
+  profileId   Int
+  profile     Profile  @relation(fields: [profileId], references: [id])
+}
+
+model WorkExperience {
+  id          Int      @id @default(autoincrement())
+  company     String
+  role        String
+  startDate   DateTime
+  endDate     DateTime?
+  description String
+  profileId   Int
+  profile     Profile  @relation(fields: [profileId], references: [id])
+}
+
+model Education {
+  id          Int      @id @default(autoincrement())
+  school      String
+  degree      String
+  year        String // e.g. "2018 - 2022"
+  profileId   Int
+  profile     Profile  @relation(fields: [profileId], references: [id])
+}
+
+model Link {
+  id        Int     @id @default(autoincrement())
+  platform  String  // e.g. "GitHub", "LinkedIn"
+  url       String
+  profileId Int
+  profile   Profile @relation(fields: [profileId], references: [id])
+}
