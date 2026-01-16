@@ -1,3 +1,4 @@
+Angad aheer resume link -  https://drive.google.com/file/d/1sDzCZWTOR7zwHu3PMgWSPqOhLfG6Zi4L/view?usp=drive_link
 # Candidate Profile Playground
 
 A full-stack playground functionality that serves a candidate profile, projects, and skills through a RESTful API and displays them in a modern, premium React frontend.
